@@ -1,0 +1,28 @@
+type Brand @model {
+    id: ID!
+    name: String!
+    globalLine: Boolean
+    sites: [Site] @connection(name: "BrandSites")
+}
+type Site @model {
+    id: ID!
+    title: String!
+    oneMarketing: Boolean
+    brand: Brand @connection(name: "BrandSites")
+    pages: [Page] @connection(name: "SitePages")
+}
+type Page @model {
+    id: ID!
+    url: String!
+    title: String!
+    content: String
+    site: Site @connection(name: "SitePages")
+    crawls: [Crawl] @connection(name: "PageCrawles")
+}
+type Crawl @model {
+    id: ID!
+    timestamp: Int
+    screenshot: String
+    pagespeed_score: Int
+    page: Page @connection(name: "PageCrawles")
+}

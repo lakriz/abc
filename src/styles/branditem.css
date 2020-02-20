@@ -1,0 +1,15 @@
+.brandlist__item {
+  padding: 1em 2em;
+  min-height: 180px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+}
+
+.brandlist__item__name {
+    font-size: 1.4em;
+}
+
+.brandlist__item__description {
+    color: rgba(0,0,0,.4)
+}

@@ -1,0 +1,13 @@
+body {
+  margin: 0 auto;
+  background-color: white;
+  color: black;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.c-filter-dropdown__item,
+.c-filter-dropdown__toggle {
+    border: none;
+    background: transparent;
+}

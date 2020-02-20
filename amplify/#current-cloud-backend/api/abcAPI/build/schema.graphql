@@ -1,0 +1,329 @@
+type Brand {
+  id: ID!
+  name: String!
+  globalLine: Boolean
+  sites(filter: ModelSiteFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelSiteConnection
+}
+
+type Site {
+  id: ID!
+  title: String!
+  oneMarketing: Boolean
+  brand: Brand
+  pages(filter: ModelPageFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelPageConnection
+}
+
+type Page {
+  id: ID!
+  url: String!
+  title: String!
+  content: String
+  site: Site
+  crawls(filter: ModelCrawlFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelCrawlConnection
+}
+
+type Crawl {
+  id: ID!
+  timestamp: Int
+  screenshot: String
+  pagespeed_score: Int
+  page: Page
+}
+
+enum ModelSortDirection {
+  ASC
+  DESC
+}
+
+type ModelBrandConnection {
+  items: [Brand]
+  nextToken: String
+}
+
+input ModelStringInput {
+  ne: String
+  eq: String
+  le: String
+  lt: String
+  ge: String
+  gt: String
+  contains: String
+  notContains: String
+  between: [String]
+  beginsWith: String
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  size: ModelSizeInput
+}
+
+input ModelIDInput {
+  ne: ID
+  eq: ID
+  le: ID
+  lt: ID
+  ge: ID
+  gt: ID
+  contains: ID
+  notContains: ID
+  between: [ID]
+  beginsWith: ID
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  size: ModelSizeInput
+}
+
+input ModelIntInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelFloatInput {
+  ne: Float
+  eq: Float
+  le: Float
+  lt: Float
+  ge: Float
+  gt: Float
+  between: [Float]
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelBooleanInput {
+  ne: Boolean
+  eq: Boolean
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelSizeInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+}
+
+input ModelBrandFilterInput {
+  id: ModelIDInput
+  name: ModelStringInput
+  globalLine: ModelBooleanInput
+  and: [ModelBrandFilterInput]
+  or: [ModelBrandFilterInput]
+  not: ModelBrandFilterInput
+}
+
+type Query {
+  getBrand(id: ID!): Brand
+  listBrands(filter: ModelBrandFilterInput, limit: Int, nextToken: String): ModelBrandConnection
+  getSite(id: ID!): Site
+  listSites(filter: ModelSiteFilterInput, limit: Int, nextToken: String): ModelSiteConnection
+  getPage(id: ID!): Page
+  listPages(filter: ModelPageFilterInput, limit: Int, nextToken: String): ModelPageConnection
+  getCrawl(id: ID!): Crawl
+  listCrawls(filter: ModelCrawlFilterInput, limit: Int, nextToken: String): ModelCrawlConnection
+}
+
+input CreateBrandInput {
+  id: ID
+  name: String!
+  globalLine: Boolean
+}
+
+input UpdateBrandInput {
+  id: ID!
+  name: String
+  globalLine: Boolean
+}
+
+input DeleteBrandInput {
+  id: ID
+}
+
+type Mutation {
+  createBrand(input: CreateBrandInput!, condition: ModelBrandConditionInput): Brand
+  updateBrand(input: UpdateBrandInput!, condition: ModelBrandConditionInput): Brand
+  deleteBrand(input: DeleteBrandInput!, condition: ModelBrandConditionInput): Brand
+  createSite(input: CreateSiteInput!, condition: ModelSiteConditionInput): Site
+  updateSite(input: UpdateSiteInput!, condition: ModelSiteConditionInput): Site
+  deleteSite(input: DeleteSiteInput!, condition: ModelSiteConditionInput): Site
+  createPage(input: CreatePageInput!, condition: ModelPageConditionInput): Page
+  updatePage(input: UpdatePageInput!, condition: ModelPageConditionInput): Page
+  deletePage(input: DeletePageInput!, condition: ModelPageConditionInput): Page
+  createCrawl(input: CreateCrawlInput!, condition: ModelCrawlConditionInput): Crawl
+  updateCrawl(input: UpdateCrawlInput!, condition: ModelCrawlConditionInput): Crawl
+  deleteCrawl(input: DeleteCrawlInput!, condition: ModelCrawlConditionInput): Crawl
+}
+
+input ModelBrandConditionInput {
+  name: ModelStringInput
+  globalLine: ModelBooleanInput
+  and: [ModelBrandConditionInput]
+  or: [ModelBrandConditionInput]
+  not: ModelBrandConditionInput
+}
+
+enum ModelAttributeTypes {
+  binary
+  binarySet
+  bool
+  list
+  map
+  number
+  numberSet
+  string
+  stringSet
+  _null
+}
+
+type Subscription {
+  onCreateBrand: Brand @aws_subscribe(mutations: ["createBrand"])
+  onUpdateBrand: Brand @aws_subscribe(mutations: ["updateBrand"])
+  onDeleteBrand: Brand @aws_subscribe(mutations: ["deleteBrand"])
+  onCreateSite: Site @aws_subscribe(mutations: ["createSite"])
+  onUpdateSite: Site @aws_subscribe(mutations: ["updateSite"])
+  onDeleteSite: Site @aws_subscribe(mutations: ["deleteSite"])
+  onCreatePage: Page @aws_subscribe(mutations: ["createPage"])
+  onUpdatePage: Page @aws_subscribe(mutations: ["updatePage"])
+  onDeletePage: Page @aws_subscribe(mutations: ["deletePage"])
+  onCreateCrawl: Crawl @aws_subscribe(mutations: ["createCrawl"])
+  onUpdateCrawl: Crawl @aws_subscribe(mutations: ["updateCrawl"])
+  onDeleteCrawl: Crawl @aws_subscribe(mutations: ["deleteCrawl"])
+}
+
+type ModelSiteConnection {
+  items: [Site]
+  nextToken: String
+}
+
+input ModelSiteFilterInput {
+  id: ModelIDInput
+  title: ModelStringInput
+  oneMarketing: ModelBooleanInput
+  and: [ModelSiteFilterInput]
+  or: [ModelSiteFilterInput]
+  not: ModelSiteFilterInput
+}
+
+input CreateSiteInput {
+  id: ID
+  title: String!
+  oneMarketing: Boolean
+  siteBrandId: ID
+}
+
+input UpdateSiteInput {
+  id: ID!
+  title: String
+  oneMarketing: Boolean
+  siteBrandId: ID
+}
+
+input DeleteSiteInput {
+  id: ID
+}
+
+input ModelSiteConditionInput {
+  title: ModelStringInput
+  oneMarketing: ModelBooleanInput
+  and: [ModelSiteConditionInput]
+  or: [ModelSiteConditionInput]
+  not: ModelSiteConditionInput
+}
+
+type ModelPageConnection {
+  items: [Page]
+  nextToken: String
+}
+
+input ModelPageFilterInput {
+  id: ModelIDInput
+  url: ModelStringInput
+  title: ModelStringInput
+  content: ModelStringInput
+  and: [ModelPageFilterInput]
+  or: [ModelPageFilterInput]
+  not: ModelPageFilterInput
+}
+
+input CreatePageInput {
+  id: ID
+  url: String!
+  title: String!
+  content: String
+  pageSiteId: ID
+}
+
+input UpdatePageInput {
+  id: ID!
+  url: String
+  title: String
+  content: String
+  pageSiteId: ID
+}
+
+input DeletePageInput {
+  id: ID
+}
+
+input ModelPageConditionInput {
+  url: ModelStringInput
+  title: ModelStringInput
+  content: ModelStringInput
+  and: [ModelPageConditionInput]
+  or: [ModelPageConditionInput]
+  not: ModelPageConditionInput
+}
+
+type ModelCrawlConnection {
+  items: [Crawl]
+  nextToken: String
+}
+
+input ModelCrawlFilterInput {
+  id: ModelIDInput
+  timestamp: ModelIntInput
+  screenshot: ModelStringInput
+  pagespeed_score: ModelIntInput
+  and: [ModelCrawlFilterInput]
+  or: [ModelCrawlFilterInput]
+  not: ModelCrawlFilterInput
+}
+
+input CreateCrawlInput {
+  id: ID
+  timestamp: Int
+  screenshot: String
+  pagespeed_score: Int
+  crawlPageId: ID
+}
+
+input UpdateCrawlInput {
+  id: ID!
+  timestamp: Int
+  screenshot: String
+  pagespeed_score: Int
+  crawlPageId: ID
+}
+
+input DeleteCrawlInput {
+  id: ID
+}
+
+input ModelCrawlConditionInput {
+  timestamp: ModelIntInput
+  screenshot: ModelStringInput
+  pagespeed_score: ModelIntInput
+  and: [ModelCrawlConditionInput]
+  or: [ModelCrawlConditionInput]
+  not: ModelCrawlConditionInput
+}

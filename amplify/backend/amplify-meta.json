@@ -1,0 +1,58 @@
+{
+    "providers": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-abc-amplify-dev-151806-authRole",
+            "UnauthRoleArn": "arn:aws:iam::902877461889:role/amplify-abc-amplify-dev-151806-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::902877461889:role/amplify-abc-amplify-dev-151806-authRole",
+            "Region": "eu-central-1",
+            "DeploymentBucketName": "amplify-abc-amplify-dev-151806-deployment",
+            "UnauthRoleName": "amplify-abc-amplify-dev-151806-unauthRole",
+            "StackName": "amplify-abc-amplify-dev-151806",
+            "StackId": "arn:aws:cloudformation:eu-central-1:902877461889:stack/amplify-abc-amplify-dev-151806/d3522090-4f34-11ea-af63-02310af8dee8",
+            "AmplifyAppId": "d1xhljm91rdz1i"
+        }
+    },
+    "api": {
+        "abcAPI": {
+            "service": "AppSync",
+            "providerPlugin": "awscloudformation",
+            "output": {
+                "authConfig": {
+                    "additionalAuthenticationProviders": [],
+                    "defaultAuthentication": {
+                        "authenticationType": "API_KEY",
+                        "apiKeyConfig": {
+                            "description": "",
+                            "apiKeyExpirationDays": "30"
+                        }
+                    }
+                },
+                "GraphQLAPIIdOutput": "366lcar4pvfxpgyg4whdc3u7z4",
+                "GraphQLAPIEndpointOutput": "https://uwgazybhp5dlnmhwdq2ojdedf4.appsync-api.eu-central-1.amazonaws.com/graphql",
+                "GraphQLAPIKeyOutput": "da2-njbovmj5ozgt5jhoo7pqexoz2y"
+            },
+            "lastPushTimeStamp": "2020-02-20T12:25:43.454Z",
+            "providerMetadata": {
+                "s3TemplateURL": "https://s3.amazonaws.com/amplify-abc-amplify-dev-151806-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+                "logicalId": "apiabcAPI"
+            }
+        }
+    },
+    "hosting": {
+        "S3AndCloudFront": {
+            "service": "S3AndCloudFront",
+            "providerPlugin": "awscloudformation",
+            "output": {
+                "S3BucketSecureURL": "https://abc-amplify-20200219125304-hostingbucket-dev.s3.amazonaws.com",
+                "WebsiteURL": "http://abc-amplify-20200219125304-hostingbucket-dev.s3-website.eu-central-1.amazonaws.com",
+                "Region": "eu-central-1",
+                "HostingBucketName": "abc-amplify-20200219125304-hostingbucket-dev"
+            },
+            "lastPushTimeStamp": "2020-02-20T12:25:43.455Z",
+            "providerMetadata": {
+                "s3TemplateURL": "https://s3.amazonaws.com/amplify-abc-amplify-dev-151806-deployment/amplify-cfn-templates/hosting/template.json",
+                "logicalId": "hostingS3AndCloudFront"
+            }
+        }
+    }
+}
